@@ -4,6 +4,7 @@
 #include <QGraphicsRectItem>
 #include <QObject>
 
+//the pew gun shouldn't be a rect, perfect for testing
 class PewGun: public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:

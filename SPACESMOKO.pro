@@ -17,14 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Enemy.cpp \
-    Game.cpp \
+    main.cpp \
     MyRect.cpp \
-    PewGun.cpp \
-    main.cpp
+    PewGun.cpp
 
 HEADERS += \
     Enemy.h \
-    Game.h \
     MyRect.h \
     PewGun.h
 
@@ -34,6 +32,6 @@ TRANSLATIONS += \
     SPACESMOKO_en_US.ts
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
+qnx: target.path = /Users/devinmurray/Desktop/$${TARGET}
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target

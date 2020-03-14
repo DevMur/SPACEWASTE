@@ -31,7 +31,6 @@ void PewGun::move(){
         }
     }
 
-
     //let the bullet fly, rate tbd on testing and games vibe
     setPos(x(), y()-10);
     if (pos().y() + rect().height() < 0)
@@ -40,4 +39,10 @@ void PewGun::move(){
         delete this;
         //qDebug() << "bullet off screen";
     }
+
+    /*
+        add function to delay the rate at which pew bullets can fly
+        also       
+            combine with input lag/one input dominating others.
+    */
 }

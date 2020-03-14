@@ -4,6 +4,10 @@
 #include "MyRect.h"
 #include "PewGun.h"
 #include "Enemy.h"
+//must include the sprite (rect) 
+//      the weapons
+//      
+
 
 void MyRect::keyPressEvent(QKeyEvent *event)
 {
@@ -26,6 +30,11 @@ void MyRect::keyPressEvent(QKeyEvent *event)
     }
 }
 
+//this is currently here for immediate use
+//it should exist in the gamestate class
+//Enemy.h can be switched out for each enemy and boss
+//spawn may also be used for weapon / point drops
+//would still exist in the gamestate, not the player
 void MyRect::spawn()
 {
     Enemy *crug = new Enemy();
