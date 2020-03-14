@@ -1,3 +1,9 @@
+Devin Murray
+The game.cpp file will hold the main. It broke the game, I will push a depreciated folder.
+It's been pushed to a depreciated folder.
+to run
+
+
 1)The board will be created as well as player sprites and obstacles. 
 They should be able to move horizontally, die, and compile a score. 
 There will be no crash animations, no sounds, nor moving background. 
