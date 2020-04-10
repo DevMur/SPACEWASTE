@@ -1,2 +1,12 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>images.qrc</file>
+    </qresource>
+    <qresource prefix="/Sounds"/>
+    <qresource prefix="/images">
+        <file>PewGun.png</file>
+        <file>Crug.png</file>
+        <file>Spaceship.png</file>
+        <file>bg.png</file>
+    </qresource>
+</RCC>
