@@ -17,6 +17,7 @@ at least moreso than I did, saves a lot of vs making a rect and having it behave
 3. The next deadline will be putting it all together. Finish level 1 go to level 2, 3, etc. Boss fight. I have 
 music and sound effects, they live on a computer I can't get to at the moment but I'd like to get more effects.
 Levels will start and continue until death or end. Name will be prompted. Weapon drops/seamless change, 
-scoreboard/health rework, boss fight, level iteration, and graphic buffs are things TODO.
+scoreboard/health rework (needs to die or lose health on impact), boss fight, level iteration, and graphic buffs 
+are things TODO.
 
 4. SEE HW4_Images
