@@ -11,6 +11,7 @@ extern Game * game; // there is an external global object called game
 
 Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     // draw graphics
+    //where is this being pushed too?
     setPixmap(QPixmap(":/images/PewGun.png"));
     setScale(0.25); //it's too big
     setRotation(90);//it's sideways
