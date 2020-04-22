@@ -5,15 +5,20 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QMediaPlayer>
+#include "Score.h"
 
 class Player:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     Player(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
+    int getLives(){ return lives; }
+    void setScore(Score current);
 public slots:
     void spawn();
 private:
+    int lives;
+    int total_points;
     QMediaPlayer * bulletsound;
 };
 //upon spawn a player needs to gain control of their ship (keyboard)

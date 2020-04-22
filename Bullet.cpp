@@ -3,6 +3,8 @@
 #include <QGraphicsScene>
 #include <QList>
 #include "Enemy.h"
+#include "Medium_Enemy.h"
+#include "Hard_Enemy.h"
 #include "Game.h"
 
 extern Game * game; // there is an external global object called game
@@ -16,19 +18,20 @@ Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
     //connect a timer to move() the bullet every so often
     QTimer * timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+    connect(timer,SIGNAL(timeout()),this,SLOT(move_bullet()));
 
     //after review the speed stays.
     timer->start(50);
 }
 
-void Bullet::move(){
+void Bullet::move_bullet(){
 
     QList<QGraphicsItem *> colliding_items = collidingItems();// get a list of all the items currently colliding with this bullet
 
     for (int i = 0, n = colliding_items.size(); i < n; ++i)// if one of the colliding items is an Enemy, destroy both the bullet and the enemy
     {
-        if (typeid(*(colliding_items[i])) == typeid(Enemy))
+        if (typeid(*(colliding_items[i])) == typeid(Enemy) || typeid(*(colliding_items[i])) == typeid(Medium_Enemy)
+                || typeid(*(colliding_items[i])) == typeid(Hard_Enemy))
         {
             game->score->increase();// increase the score
 

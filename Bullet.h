@@ -10,7 +10,7 @@ class Bullet: public QObject, public QGraphicsPixmapItem {
 public:
     Bullet(QGraphicsItem * parent=0);
 public slots:
-    void move();
+    void move_bullet();
 };
 //Pretty straight forward. A bullet with a shape gets created.
 //it's only job is to move

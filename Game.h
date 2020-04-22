@@ -16,7 +16,6 @@ public:
     Player * player;
     Score * score;
     Health * health;
-
 };
 //An option here is to give it private Game methods which ARE the levels.
 //private current level code.

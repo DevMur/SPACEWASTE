@@ -11,7 +11,7 @@ public:
     Enemy(QGraphicsItem * parent=0);//crug
     //point value goes here, getter, const value. ugh test
 public slots:
-    void move();
+    void move_easy();
 };
 //Crug does the inverse of bullets but they have different spawn requirements.
 //move could be renamed.

@@ -20,13 +20,13 @@ Enemy::Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
     // make/connect a timer to move() the enemy every so often
     QTimer * timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+    connect(timer,SIGNAL(timeout()),this,SLOT(move_easy()));
 
     // start the timer
     timer->start(50);
 }
 
-void Enemy::move(){
+void Enemy::move_easy(){
     // move enemy down
     setPos(x(),y()+5);
 
