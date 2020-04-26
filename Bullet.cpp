@@ -22,7 +22,7 @@ Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     timer->start(50);
 }
 
-void Bullet::move(){
+void Bullet::move_bullet(){
 
     QList<QGraphicsItem *> colliding_items = collidingItems();// get a list of all the items currently colliding with this bullet
 

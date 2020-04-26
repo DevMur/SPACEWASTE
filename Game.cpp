@@ -49,7 +49,7 @@ Game::Game(QWidget *parent){
 //New music for each level? Just bosses? End music? TODO ask for more songs from Jordan
     show();
 //end level 1
-
+//ill probably go back and delete level relateds comments but uhhh... fuck while loops
     //level 2
         scene = new QGraphicsScene();
         scene->setSceneRect(0,0,800,600); // make the scene 800x600
@@ -89,5 +89,30 @@ Game::Game(QWidget *parent){
     //    music->play();
     //New music for each level? Just bosses? End music? TODO ask for more songs from Jordan
         show();
-    //end level 2
+        //end level 2
 }
+
+void Game::Menu()
+{
+    QGraphicsTextItem* title = new QGraphicsTextItem("It Gets A Name When Others Can Play");
+    QFont titleFont("comic sans", 50);
+    title->setFont(titleFont);
+    int title_xPos = this->width()/2 - title->boundingRect().width()/2;
+    int title_yPos = 150;
+    title->setPos(title_xPos, title_yPos);
+    scene->addItem(title);
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
