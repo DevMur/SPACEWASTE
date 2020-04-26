@@ -10,6 +10,7 @@ Enemy::Enemy(){
     //      adjust spawn rate
     //      add points
     //      destroy on impact
+    //github work
 
     //set random position
     int random_int = rand() % 700;
