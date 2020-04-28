@@ -10,13 +10,11 @@ class Enemy: public QObject,public QGraphicsPixmapItem{
 public:
     Enemy(QGraphicsItem * parent=0);//crug
     //point value goes here, getter, const value. ugh test
+    int value = 10;
 public slots:
     void move_easy();
 };
-//Crug does the inverse of bullets but they have different spawn requirements.
-//move could be renamed.
-//TODO points of 1 work for now but increment point shouldn't be called hundreds of times...
-//or should it...
+
 
 
 #endif // ENEMY_H

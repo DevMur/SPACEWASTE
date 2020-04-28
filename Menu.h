@@ -5,13 +5,14 @@
 #include <QGraphicsSceneMouseEvent>
 
 
-class Menu: public QGraphicsRectItem{
+class Menu: public QObject, public QGraphicsRectItem{
+    Q_OBJECT
 public:
     Menu(QString name, QGraphicsItem *parent=NULL);
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event); //press start or quit
-    void mouseHoverOnEvent(QGraphicsSceneHoverEvent *event); //aesthetics :)
-    void mouseHoverOffEvent(QGraphicsSceneHoverEvent *event);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event); //aesthetics :)
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event); //built in so it took like 5 mins to get working
 signals:
     void clicked();
 private:

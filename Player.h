@@ -11,15 +11,16 @@ class Player:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     Player(QGraphicsItem * parent=0);
+
     void keyPressEvent(QKeyEvent * event);
     int getLives(){ return lives; }
-    void setScore(Score current);
-public slots:
-    void spawn();
+    void setScore(int points);
 private:
     int lives;
     int total_points;
     QMediaPlayer * bulletsound;
+signals:
+    void next_level();
 };
 //upon spawn a player needs to gain control of their ship (keyboard)
 //there are only 3 possible events but bullets collision test should

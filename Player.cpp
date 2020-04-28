@@ -7,19 +7,16 @@
 #include "Hard_Enemy.h"
 #include "Score.h"
 
-Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
-    // set bullet sound
-//    bulletsound = new QMediaPlayer();
-//    bulletsound->setMedia(QUrl("qrc:/sounds/bullet.wav"));
-    //TODO just get the laser synth samples from desktop
-
+Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
+{
     setPixmap(QPixmap(":/images/Spaceship.png"));
     setScale(0.05);
     lives = 3;
+    total_points = 0;
 }
 
-void Player::keyPressEvent(QKeyEvent *event){
-
+void Player::keyPressEvent(QKeyEvent *event)
+{
     if (event->key() == Qt::Key_Left)
     {
         if (pos().x() > 0)
@@ -52,25 +49,8 @@ void Player::keyPressEvent(QKeyEvent *event){
     }
 }
 
-void Player::setScore(Score current){
-    total_points = current.getScore();
+//REDUNDANT?
+void Player::setScore(int points){
+    total_points = total_points + points;
 }
 
-void Player::spawn(){
-    // create an enemy
-    if (total_points <= 10)
-    {
-        Enemy * enemy = new Enemy();
-        scene()->addItem(enemy);
-    }
-    else if (total_points > 10 && total_points <= 50)
-    {
-        Medium_Enemy * e2 = new Medium_Enemy();
-        scene()->addItem(e2);
-    }
-    else
-    {
-        Hard_Enemy * e3 = new Hard_Enemy();
-        scene()->addItem(e3);
-    }
-}

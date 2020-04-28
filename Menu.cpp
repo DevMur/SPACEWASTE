@@ -23,18 +23,20 @@ void Menu::mousePressEvent(QGraphicsSceneMouseEvent *event)
     emit clicked();
 }
 
-void Menu::mouseHoverOnEvent(QGraphicsSceneHoverEvent *event)
+void Menu::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
+    //qDebug("hover");
     QBrush brush;
     brush.setColor(Qt::black);
     brush.setStyle(Qt::LinearGradientPattern);
     setBrush(brush);
 }
 
-void Menu::mouseHoverOffEvent(QGraphicsSceneHoverEvent *event)
+void Menu::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     QBrush brush;
     brush.setColor(Qt::darkMagenta);
     brush.setStyle(Qt::SolidPattern);
     setBrush(brush);
 }
+
