@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QWidget>
 #include <QGraphicsScene>
+
 #include "Player.h"
 #include "Score.h"
 #include "Health.h"
@@ -26,12 +27,13 @@ public slots:
     void Level1();
     void Level2();
     void Level3();
-//    void BossFight();
+    void Boss_Fight();
+    void Spawn_Boss();
     void spawn();
     void spawn2();
     void spawn3();
 signals:
-    void next_level();
+    //void next_level();
 
 
 };

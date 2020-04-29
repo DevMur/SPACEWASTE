@@ -1,6 +1,7 @@
-#include "Menu.h"
 #include <QBrush>
 #include <QGraphicsTextItem>
+
+#include "Menu.h"
 
 Menu::Menu(QString name, QGraphicsItem *parent): QGraphicsRectItem(parent)
 {

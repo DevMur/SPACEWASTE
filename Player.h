@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QMediaPlayer>
+
 #include "Score.h"
 
 class Player:public QObject, public QGraphicsPixmapItem{

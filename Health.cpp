@@ -1,6 +1,7 @@
+#include <QFont>
+
 #include "Health.h"
 #include "Player.h"
-#include <QFont> //not required...
 
 Health::Health(QGraphicsItem *parent): QGraphicsTextItem(parent){
 

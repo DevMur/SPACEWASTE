@@ -1,10 +1,10 @@
-#include "Medium_Enemy.h"
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QList>
 #include <stdlib.h>
 #include <QtMath>
-// rand() -> really large int
+
+#include "Medium_Enemy.h"
 #include "Game.h"
 
 extern Game * game;

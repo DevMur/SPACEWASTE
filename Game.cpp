@@ -1,16 +1,17 @@
-#include "Game.h"
-#include "Menu.h"
-#include "Bullet.h"
-#include "Enemy.h"
-#include "Medium_Enemy.h"
-#include "Hard_Enemy.h"
-
 #include <QTimer>
 #include <QGraphicsTextItem>
 #include <QFont>
 #include <QMediaPlayer>
 #include <QBrush>
 #include <QImage>
+
+#include "Game.h"
+#include "Menu.h"
+#include "Bullet.h"
+#include "Enemy.h"
+#include "Medium_Enemy.h"
+#include "Hard_Enemy.h"
+#include "Megaleg.h"
 
 Game::Game(QWidget *parent){
 //create screen
@@ -40,6 +41,8 @@ void Game::DisplayMenu()
     int pb_yPos = 350; //tbd location
     play->setPos(pb_xPos, pb_yPos);
     connect(play, SIGNAL(clicked()), this, SLOT(Level1()));
+    //testing boss
+    //connect(play, SIGNAL(clicked()), this, SLOT(Boss_Fight()));
     scene->addItem(play);
 
     //exit and eventually settings, such as ship slider speed and maybe difficulty for bosses.
@@ -112,8 +115,9 @@ void Game::Level1()
     health->setPos(health->x(),health->y()+25); //not where this will go, good for testing
     scene->addItem(health);
 
-    connect(player, SIGNAL(next_level()), this, SLOT(Level2()));
-
+    connect(player, SIGNAL(next_level()), this, SLOT(Boss_Fight()));
+    //connect(player, SIGNAL(next_level()), this, SLOT(Level2()));
+    //testing boss
     QTimer * timer = new QTimer();
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn()));
     timer->start(2000);
@@ -152,7 +156,22 @@ void Game::Level3()
  */
 
 
+void Game::Boss_Fight()
+{
+    //QTimer * timer = new QTimer();
+    Spawn_Boss();
+    //timer->start();
 
+    show();
+
+    //timer->stop();
+}
+
+void Game::Spawn_Boss()
+{
+    Megaleg *fin = new Megaleg();
+    scene->addItem(fin);
+}
 
 
 

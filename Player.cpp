@@ -1,6 +1,7 @@
-#include "Player.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
+
+#include "Player.h"
 #include "Bullet.h"
 #include "Enemy.h"
 #include "Medium_Enemy.h"
@@ -20,12 +21,12 @@ void Player::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Left)
     {
         if (pos().x() > 0)
-        setPos(x()-20,y());
+        setPos(x()-30,y());
     }
     else if (event->key() == Qt::Key_Right)
     {
         if (pos().x() + 100 < 800)
-        setPos(x()+20,y());
+        setPos(x()+30,y());
     }
     //HOW CAN THIS BE FASTER WITHOUT MOVING TOO MANY PIXELS PER CLICK
     //TODO spacing/movement
@@ -54,7 +55,7 @@ void Player::keyPressEvent(QKeyEvent *event)
     }
 }
 
-//REDUNDANT?
+//REDUNDANT? yes, will deal with later
 void Player::setScore(int points){
     total_points = total_points + points;
 }
