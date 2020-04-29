@@ -10,6 +10,7 @@ class Medium_Enemy: public QObject,public QGraphicsPixmapItem{
 public:
     Medium_Enemy(QGraphicsItem * parent=0);
     int value = 25;
+    int switcher = 0;
 public slots:
     void move_medium();
 };

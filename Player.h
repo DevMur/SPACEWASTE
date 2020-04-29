@@ -15,6 +15,7 @@ public:
     void keyPressEvent(QKeyEvent * event);
     int getLives(){ return lives; }
     void setScore(int points);
+    int ammo_cap = 3;
 private:
     int lives;
     int total_points;

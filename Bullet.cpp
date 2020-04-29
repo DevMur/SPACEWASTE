@@ -10,11 +10,12 @@
 #include <QGraphicsScene>
 #include <QList>
 
+
 extern Game * game; // there is an external global object called game
+
 
 Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
-    // draw graphics
     setPixmap(QPixmap(":/images/PewGun.png"));
     setScale(0.25); //it's too big
     setRotation(90);//it's sideways
@@ -27,39 +28,42 @@ Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     timer->start(50);
 }
 
+
 void Bullet::move_bullet(){
 
-    QList<QGraphicsItem *> colliding_items = collidingItems();// get a list of all the items currently colliding with this bullet
-    for (int i = 0, n = colliding_items.size(); i < n; ++i)// if one of the colliding items is an Enemy, destroy both the bullet and the enemy
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
     {
         if (typeid(*(colliding_items[i])) == typeid(Enemy))
         {
-            game->score->increase(10);// increase the score
+            game->player->ammo_cap++;
 
-            scene()->removeItem(colliding_items[i]);// still on heap so remove, best practice?
+            game->score->increase(10);
+
+            scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
 
-            delete colliding_items[i]; // delete them from the heap to save memory
+            delete colliding_items[i];
             delete this;
 
             if (game->score->getScore() >= 20 && game->level == 1)
             {
-                qDebug("score reached next level1");
+                //qDebug("score reached next level1");
                 emit game->player->next_level();
                 game->level = 2;
-                //QObject::disconnect(SIGNAL(timeout()),game,SLOT(spawn()));
             }
-
             return;
         }
         else if (typeid(*(colliding_items[i])) == typeid(Medium_Enemy))
         {
-            game->score->increase(25);// increase the score
+            game->player->ammo_cap++;
 
-            scene()->removeItem(colliding_items[i]);// still on heap so remove, best practice?
+            game->score->increase(25);
+
+            scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
 
-            delete colliding_items[i]; // delete them from the heap to save memory
+            delete colliding_items[i];
             delete this;
 
             if (game->score->getScore() >= 100 && game->level == 2)
@@ -73,16 +77,19 @@ void Bullet::move_bullet(){
         }
         else if (typeid(*(colliding_items[i])) == typeid(Hard_Enemy) )
         {
-            game->score->increase(50);// increase the score
-            scene()->removeItem(colliding_items[i]);// still on heap so remove, best practice?
+            game->player->ammo_cap++;
+
+            game->score->increase(50);
+
+            scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
 
-            delete colliding_items[i]; // delete them from the heap to save memory
+            delete colliding_items[i];
             delete this;
 
             if (game->score->getScore() >= 10000 && game->level == 3)
             {
-                qDebug("score reached next level3");
+                //qDebug("score reached next level3");
                 emit game->player->next_level();
                 game->level= 4;
             }
@@ -92,10 +99,11 @@ void Bullet::move_bullet(){
     }
 
     // if there was no collision with an Enemy, move the bullet forward
-    setPos(x(),y()-10);
     // if the bullet is off the screen, destroy it
+    setPos(x(),y()-20);
     if (pos().y() < 0){
         scene()->removeItem(this);
         delete this;
+        game->player->ammo_cap++;
     }
 }

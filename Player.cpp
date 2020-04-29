@@ -32,9 +32,14 @@ void Player::keyPressEvent(QKeyEvent *event)
 
     else if (event->key() == Qt::Key_Space)
     {
-        Bullet * bullet = new Bullet();
-        bullet->setPos(x()+45,y());
-        scene()->addItem(bullet);
+        if (this->ammo_cap > 0)
+        {
+            Bullet * bullet = new Bullet();
+            bullet->setPos(x()+45,y());
+            scene()->addItem(bullet);
+            this->ammo_cap--;
+        }
+
 
 //        // play bulletsound
 //        if (bulletsound->state() == QMediaPlayer::PlayingState)

@@ -4,12 +4,6 @@
 
 Health::Health(QGraphicsItem *parent): QGraphicsTextItem(parent){
 
-    //for (int i = 0; i < Player::getLives(); i++)
-    {
-
-    }
-
-
     health = 3;
 
     setPlainText(QString("Health: ") + QString::number(health)); // Health: 3 TODO

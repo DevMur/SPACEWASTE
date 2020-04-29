@@ -27,7 +27,6 @@ Enemy::Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 }
 
 void Enemy::move_easy(){
-    // move enemy down
     setPos(x(),y()+5);
 
     // destroy enemy when it goes out of the screen
@@ -36,3 +35,5 @@ void Enemy::move_easy(){
         delete this;
     }
 }
+
+
