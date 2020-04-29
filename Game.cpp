@@ -91,6 +91,24 @@ void Game::spawn3()
     }
 }
 
+void Game::GameOver()
+{
+    scene->clear();
+
+    Enemy* ez = new Enemy();
+    Medium_Enemy* med = new Medium_Enemy();
+    Hard_Enemy* hard = new Hard_Enemy();
+
+    //set positions
+    //share kill count/accuaracy
+    //if boss killed do that as well
+    //if died to boss do something else
+
+    //share score
+
+
+}
+
 /*
  * first delete the menu
  * then set the stage for the game. Level one spawns a single player. Any other calls are to an implicitly
@@ -115,8 +133,8 @@ void Game::Level1()
     health->setPos(health->x(),health->y()+25); //not where this will go, good for testing
     scene->addItem(health);
 
-    connect(player, SIGNAL(next_level()), this, SLOT(Boss_Fight()));
-    //connect(player, SIGNAL(next_level()), this, SLOT(Level2()));
+    //connect(player, SIGNAL(next_level()), this, SLOT(Boss_Fight()));
+    connect(player, SIGNAL(next_level()), this, SLOT(Level2()));
     //testing boss
     QTimer * timer = new QTimer();
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn()));

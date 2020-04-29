@@ -83,6 +83,24 @@ void Hard_Enemy::move_hard(){
         }
     }
 
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+    {
+        //qDebug("condition wrong");
+        if (typeid(*(colliding_items[i])) == typeid(Player))
+        {
+            if (game->health->getHealth()-1 == -1)
+            {
+                //TODO:End game
+            }
+            qDebug("HIT");
+            game->health->decrease();
+            scene()->removeItem(this);
+            delete this;
+            break;
+        }
+    }
+
     // destroy enemy when it goes out of the screen
     if (pos().y() > 800){
         scene()->removeItem(this);

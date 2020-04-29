@@ -27,15 +27,15 @@ public slots:
     void Level1();
     void Level2();
     void Level3();
+
     void Boss_Fight();
     void Spawn_Boss();
+
     void spawn();
     void spawn2();
     void spawn3();
-signals:
-    //void next_level();
 
-
+    void GameOver();
 };
 
 #endif // GAME_H
