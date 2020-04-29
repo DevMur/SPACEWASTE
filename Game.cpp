@@ -77,7 +77,7 @@ void Game::spawn2()
 }
 void Game::spawn3()
 {
-    if (this->level == 1)
+    if (this->level == 3)
     {
         Hard_Enemy * e1 = new Hard_Enemy();
         Hard_Enemy * e2 = new Hard_Enemy();
@@ -115,11 +115,8 @@ void Game::Level1()
     connect(player, SIGNAL(next_level()), this, SLOT(Level2()));
 
     QTimer * timer = new QTimer();
-    QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn3()));
-    //QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
+    QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn()));
     timer->start(2000);
-    //catalyst = new Bullet();
-
 
     show();
 
@@ -128,9 +125,10 @@ void Game::Level1()
 //towards the end there will be an item drop
 void Game::Level2()
 {
-    qDebug("ahahahha level2 baby");
+    connect(player, SIGNAL(next_level()), this, SLOT(Level3()));
+    //qDebug("ahahahha level2 baby");
     QTimer * timer = new QTimer();
-    QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn3()));
+    QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn2()));
     timer->start(2000);
 
     show();
@@ -140,7 +138,7 @@ void Game::Level2()
 void Game::Level3()
 {
     QTimer * timer = new QTimer();
-    QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn3()));
+    QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn3()));
     timer->start(2000);
 
     show();

@@ -5,12 +5,13 @@
 #include <QObject>
 #include <QGraphicsItem>
 
-class Hard_Enemy: public QObject,public QGraphicsPixmapItem{
+#include "Enemy.h"
+
+class Hard_Enemy: public Enemy{
     Q_OBJECT
 public:
     Hard_Enemy(QGraphicsItem * parent=0);
     int value = 50;
-    int switcher = 0;
     int left = -1;
 public slots:
     void move_hard();

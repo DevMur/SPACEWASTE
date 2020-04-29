@@ -9,7 +9,7 @@ extern Game * game;
 
 
 //this needs a timer check.
-Hard_Enemy::Hard_Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
+Hard_Enemy::Hard_Enemy(QGraphicsItem *parent){
 
     int random_number = rand() % 700; //size of display
     setPos(random_number,0);
@@ -23,11 +23,11 @@ Hard_Enemy::Hard_Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(pa
     connect(timer,SIGNAL(timeout()),this,SLOT(move_hard()));
     timer->start(50);
     //switcher = 2;
-    switcher = rand()%3;
+    attack_pattern = rand()%3;
 }
 
 void Hard_Enemy::move_hard(){
-    if (switcher == 0)
+    if (attack_pattern == 0)
     {
         if (this->x() > game->player->x())
         {
@@ -38,7 +38,7 @@ void Hard_Enemy::move_hard(){
             setPos(x()+7.5,y()+7.5);
         }
     }
-    else if (switcher == 1)
+    else if (attack_pattern == 1)
     {
         if (this->y() >= (scene()->height()/4)-10 && this->y() <= (scene()->height()/4)+10)
         {
@@ -56,7 +56,7 @@ void Hard_Enemy::move_hard(){
             setPos(x(),y()+30);
         }
     }
-    else if (switcher == 2)
+    else if (attack_pattern == 2)
     {
         if (this->left == -1)
         {

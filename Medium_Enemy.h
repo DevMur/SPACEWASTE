@@ -5,12 +5,13 @@
 #include <QObject>
 #include <QGraphicsItem>
 
-class Medium_Enemy: public QObject,public QGraphicsPixmapItem{
+#include "Enemy.h"
+
+class Medium_Enemy: public Enemy{
     Q_OBJECT
 public:
     Medium_Enemy(QGraphicsItem * parent=0);
     int value = 25;
-    int switcher = 0;
 public slots:
     void move_medium();
 };

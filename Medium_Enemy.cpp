@@ -9,7 +9,7 @@
 
 extern Game * game;
 
-Medium_Enemy::Medium_Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
+Medium_Enemy::Medium_Enemy(QGraphicsItem *parent){
     //set random x position
     int random_number = rand() % 700; //size of display
     setPos(random_number,0);
@@ -23,12 +23,12 @@ Medium_Enemy::Medium_Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapIte
     connect(timer,SIGNAL(timeout()),this,SLOT(move_medium()));
     timer->start(50);
     //switcher=1;
-    switcher = rand()%3;
+    attack_pattern = rand()%3;
 }
 
 void Medium_Enemy::move_medium(){
 
-    if (this->switcher == 0)
+    if (this->attack_pattern == 0)
     {
         if (this->x() >= game->player->x()+50)
         {
@@ -39,7 +39,7 @@ void Medium_Enemy::move_medium(){
             setPos(x()+5,y()+1);
         }
     }
-    else if (this->switcher == 1)
+    else if (this->attack_pattern == 1)
     {
         if (((this->y() > 0 && this->y() <= 10) ||
             (this->y() > 200 && this->y() <= 300) ||
@@ -62,7 +62,7 @@ void Medium_Enemy::move_medium(){
             }
         }
     }
-    else if (this->switcher == 2)
+    else if (this->attack_pattern == 2)
     {
         if (this->x() < scene()->width()/3 && this->y() < scene()->height()/3)
         {

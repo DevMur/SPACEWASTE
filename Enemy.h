@@ -11,6 +11,7 @@ public:
     Enemy(QGraphicsItem * parent=0);//crug
     //point value goes here, getter, const value. ugh test
     int value = 10;
+    int attack_pattern;
 public slots:
     void move_easy();
 };
