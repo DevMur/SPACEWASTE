@@ -2,6 +2,9 @@
 
 #include "Health.h"
 #include "Player.h"
+#include "Game.h"
+
+extern Game * game;
 
 Health::Health(QGraphicsItem *parent): QGraphicsTextItem(parent){
 
@@ -17,6 +20,9 @@ Health::Health(QGraphicsItem *parent): QGraphicsTextItem(parent){
 void Health::decrease(){
     health--;
     setPlainText(QString("Health: ") + QString::number(health)); // Health: 2
+    if (health == 0){
+        game->GameOver();
+    }
 }
 
 int Health::getHealth(){

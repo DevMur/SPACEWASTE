@@ -25,85 +25,98 @@ Hard_Enemy::Hard_Enemy(QGraphicsItem *parent){
     timer->start(50);
     //switcher = 2;
     attack_pattern = rand()%3;
+    if(game->endGame == true)
+    {
+        this->setX(500);
+    }
 }
 
 void Hard_Enemy::move_hard(){
-    if (attack_pattern == 0)
+    if (game->endGame == true && this->y() <= 300)
     {
-        if (this->x() > game->player->x())
-        {
-            setPos(x()-7.5,y()+7.5);
-        }
-        else
-        {
-            setPos(x()+7.5,y()+7.5);
-        }
+        setPos(500, y()+5);
     }
-    else if (attack_pattern == 1)
+    else if (game->endGame == false)
     {
-        if (this->y() >= (scene()->height()/4)-10 && this->y() <= (scene()->height()/4)+10)
+        if (attack_pattern == 0)
         {
             if (this->x() > game->player->x())
             {
-                setPos(x()-10,y()+0.25);
+                setPos(x()-7.5,y()+7.5);
             }
             else
             {
-                setPos(x()+10,y()+0.25);
+                setPos(x()+7.5,y()+7.5);
             }
         }
-        else
+        else if (attack_pattern == 1)
         {
-            setPos(x(),y()+30);
-        }
-    }
-    else if (attack_pattern == 2)
-    {
-        if (this->left == -1)
-        {
-            if (this->x() > 400)
+            if (this->y() >= (scene()->height()/4)-10 && this->y() <= (scene()->height()/4)+10)
             {
-                this->left = 1;
+                if (this->x() > game->player->x())
+                {
+                    setPos(x()-10,y()+0.25);
+                }
+                else
+                {
+                    setPos(x()+10,y()+0.25);
+                }
             }
             else
             {
-                this->left = 0;
+                setPos(x(),y()+30);
             }
         }
-        else
+        else if (attack_pattern == 2)
         {
-            if (left)
+            if (this->left == -1)
             {
-                setPos(x()-5,y()+20);
+                if (this->x() > 400)
+                {
+                    this->left = 1;
+                }
+                else
+                {
+                    this->left = 0;
+                }
             }
             else
             {
-                setPos(x()+5,y()+20);
+                if (left)
+                {
+                    setPos(x()-5,y()+20);
+                }
+                else
+                {
+                    setPos(x()+5,y()+20);
+                }
             }
         }
-    }
 
-    QList<QGraphicsItem *> colliding_items = collidingItems();
-    for (int i = 0, n = colliding_items.size(); i < n; ++i)
-    {
-        //qDebug("condition wrong");
-        if (typeid(*(colliding_items[i])) == typeid(Player))
+
+        QList<QGraphicsItem *> colliding_items = collidingItems();
+        for (int i = 0, n = colliding_items.size(); i < n; ++i)
         {
-            if (game->health->getHealth()-1 == -1)
+            //qDebug("condition wrong");
+            if (typeid(*(colliding_items[i])) == typeid(Player))
             {
-                //TODO:End game
+//                if (game->health->getHealth()-1 == -1)
+//                {
+//                    //TODO:End game
+//                }
+                qDebug("HIT");
+                game->health->decrease();
+
+                scene()->removeItem(this);
+                delete this;
+                break;
             }
-            qDebug("HIT");
-            game->health->decrease();
+        }
+
+        // destroy enemy when it goes out of the screen
+        if (pos().y() > 800){
             scene()->removeItem(this);
             delete this;
-            break;
         }
-    }
-
-    // destroy enemy when it goes out of the screen
-    if (pos().y() > 800){
-        scene()->removeItem(this);
-        delete this;
     }
 }

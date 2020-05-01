@@ -29,25 +29,29 @@ Enemy::Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
 void Enemy::move_easy()
 {
-    setPos(x(),y()+5);
-
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
     {
         //qDebug("condition wrong");
         if (typeid(*(colliding_items[i])) == typeid(Player))
         {
-            if (game->health->getHealth()-1 == -1)
-            {
-                //TODO:End game
-            }
             qDebug("HIT");
             game->health->decrease();
+            if (game->health->getHealth() == 0)
+            {
+                game->GameOver();
+            }
             scene()->removeItem(this);
             delete this;
             break;
         }
     }
+    if (game->endGame == true && this->y() < 300)
+    {
+        setPos(200, y()+5);
+    }
+    else if (game->endGame == false)
+    {setPos(x(),y()+5); }
 
     // destroy enemy when it goes out of the screen
     if (pos().y() > 800){

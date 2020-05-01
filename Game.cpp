@@ -4,8 +4,10 @@
 #include <QMediaPlayer>
 #include <QBrush>
 #include <QImage>
+#include <QPlainTextEdit>
 
 #include "Game.h"
+#include "Score.h"
 #include "Menu.h"
 #include "Bullet.h"
 #include "Enemy.h"
@@ -23,6 +25,7 @@ Game::Game(QWidget *parent){
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(800,1000);
+
 }
 
 void Game::DisplayMenu()
@@ -93,19 +96,30 @@ void Game::spawn3()
 
 void Game::GameOver()
 {
-    scene->clear();
+    //scene->clear();
+    for (size_t i = 0, n = scene->items().size(); i<n; i++)
+    {
+        scene->items()[i]->setEnabled(false);
+    }
+
+    this->endGame = true;
 
     Enemy* ez = new Enemy();
+    scene->addItem(ez);
+
     Medium_Enemy* med = new Medium_Enemy();
+    scene->addItem(med);
+
     Hard_Enemy* hard = new Hard_Enemy();
+    scene->addItem(hard);
 
-    //set positions
-    //share kill count/accuaracy
-    //if boss killed do that as well
-    //if died to boss do something else
-
-    //share score
-
+    QGraphicsTextItem* h_score = new QGraphicsTextItem("GAME-OVER");
+    QFont h_score_Font("Times", 50);
+    h_score->setFont(h_score_Font);
+    int h_score_xPos = 200;
+    int h_score_yPos = 600;
+    h_score->setPos(h_score_xPos, h_score_yPos);
+    scene->addItem(h_score);
 
 }
 
@@ -119,6 +133,7 @@ void Game::Level1()
 {
     //level 1 delete menu;
     scene->clear();
+    //connect(health, SIGNAL(dead), this, SLOT(GameOver()));
 
     player = new Player(); //there is only a single call.
     player->setPos(400,700); // Always be in the middle bottom of screen
@@ -135,6 +150,7 @@ void Game::Level1()
 
     //connect(player, SIGNAL(next_level()), this, SLOT(Boss_Fight()));
     connect(player, SIGNAL(next_level()), this, SLOT(Level2()));
+    //connect(player, SIGNAL(dead()), this, SLOT(GameOver()));
     //testing boss
     QTimer * timer = new QTimer();
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn()));
@@ -148,6 +164,7 @@ void Game::Level1()
 void Game::Level2()
 {
     connect(player, SIGNAL(next_level()), this, SLOT(Level3()));
+    //connect(player, SIGNAL(dead()), this, SLOT(GameOver()));
     //qDebug("ahahahha level2 baby");
     QTimer * timer = new QTimer();
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn2()));
@@ -161,6 +178,7 @@ void Game::Level3()
 {
     QTimer * timer = new QTimer();
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn3()));
+    connect(player, SIGNAL(dead()), this, SLOT(GameOver()));
     timer->start(2000);
 
     show();

@@ -15,14 +15,16 @@ public:
     Game(QWidget * parent=0);
 
     void DisplayMenu();
-    //void ScoreReachedEvent();
-    //void Level1(); / no it goes in slots
 
     QGraphicsScene * scene;
     Player * player;
     Score * score;
     Health * health;
     int level = 1;
+
+    bool endGame = false;
+    void GameOver();
+
 public slots:
     void Level1();
     void Level2();
@@ -34,8 +36,6 @@ public slots:
     void spawn();
     void spawn2();
     void spawn3();
-
-    void GameOver();
 };
 
 #endif // GAME_H

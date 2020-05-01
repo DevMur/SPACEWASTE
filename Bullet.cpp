@@ -38,6 +38,7 @@ void Bullet::move_bullet(){
             game->player->ammo_cap++;
 
             game->score->increase(10);
+            game->score->increase_e_kill();
 
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
@@ -58,6 +59,7 @@ void Bullet::move_bullet(){
             game->player->ammo_cap++;
 
             game->score->increase(25);
+            game->score->increase_m_kill();
 
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
@@ -79,6 +81,7 @@ void Bullet::move_bullet(){
             game->player->ammo_cap++;
 
             game->score->increase(50);
+            game->score->increase_h_kill();
 
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);

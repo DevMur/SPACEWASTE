@@ -10,6 +10,8 @@ public:
     int getHealth();
 private:
     int health;
+signals:
+    void dead();
 };
 
 //It's an over-qualified integer.
