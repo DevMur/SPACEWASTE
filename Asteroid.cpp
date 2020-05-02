@@ -55,18 +55,5 @@ void Asteroid::move_asteroid()
     }
 }
 
-void Asteroid::decreaseHealth()
-{
-    asteroid_health--;
-//    if (this->getHealth() == 0)
-//    {
-//        if (rand()%5 == 0)
-//        {
-//            scene()->addItem(spawn_ammo());
-//        }
-//    }
-}
-
-
 
 

@@ -8,10 +8,11 @@
 class Enemy: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    Enemy(QGraphicsItem * parent=0);//crug
-    //point value goes here, getter, const value. ugh test
+    Enemy(QGraphicsItem * parent=0);
+
     int value = 10;
     int attack_pattern;
+
 public slots:
     void move_easy();
 };

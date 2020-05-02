@@ -12,16 +12,7 @@ class Asteroid: public Enemy{
 public:
     Asteroid(QGraphicsItem * parent=0);
 
-    void decreaseHealth();
-    int getHealth();
-
-    //void spawn_ammo();
-
-private:
-    int asteroid_health;
-
 public slots:
     void move_asteroid();
-    //void move_ammo();
 };
 #endif // ASTEROID_H

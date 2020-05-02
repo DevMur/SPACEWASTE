@@ -10,11 +10,12 @@ class Bullet: public QObject, public QGraphicsPixmapItem {
 public:
     Bullet(QGraphicsItem * parent=0);
 
-    void spawn_ammo();
+    void spawn_ammo(Bullet* maybe);
+
+    bool for_player = false;
 
 public slots:
     void move_bullet();
-    void move_ammo();
 };
 //Pretty straight forward. A bullet with a shape gets created.
 //it's only job is to move
