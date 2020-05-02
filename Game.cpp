@@ -10,6 +10,7 @@
 #include "Score.h"
 #include "Menu.h"
 #include "Bullet.h"
+#include "Asteroid.h"
 #include "Enemy.h"
 #include "Medium_Enemy.h"
 #include "Hard_Enemy.h"
@@ -93,6 +94,11 @@ void Game::spawn3()
         scene->addItem(e3);
     }
 }
+void Game::spawn_asteroid()
+{
+    Asteroid* drop = new Asteroid();
+    scene->addItem(drop);
+}
 
 void Game::GameOver()
 {
@@ -101,6 +107,10 @@ void Game::GameOver()
     {
         scene->items()[i]->setEnabled(false);
     }
+//    QTimer* timer = new QTimer;
+//    disconnect(this, SLOT(spawn()));
+//    disconnect(SLOT(spawn2()));
+//    disconnect(SLOT(spawn3()));
 
     this->endGame = true;
 
@@ -155,7 +165,15 @@ void Game::Level1()
     QTimer * timer = new QTimer();
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn()));
     timer->start(2000);
+    QTimer * a_timer = new QTimer();
+    QObject::connect(a_timer,SIGNAL(timeout()),this,SLOT(spawn_asteroid()));
+    a_timer->start(10000);
 
+    if (this->endGame == true)
+    {
+        qDebug("uhm");
+        timer->stop();
+    }
     show();
 
 }
@@ -170,6 +188,10 @@ void Game::Level2()
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn2()));
     timer->start(2000);
 
+    if (this->endGame == true)
+    {
+        timer->stop();
+    }
     show();
 }
 //enemies movements must be non-linear
@@ -181,6 +203,10 @@ void Game::Level3()
     connect(player, SIGNAL(dead()), this, SLOT(GameOver()));
     timer->start(2000);
 
+    if (this->endGame == true)
+    {
+        timer->stop();
+    }
     show();
 }
 

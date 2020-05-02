@@ -17,6 +17,7 @@ public:
     int getLives(){ return lives; }
     void setScore(int points);
     int ammo_cap = 3;
+    int asteroid_hits = 0;
 private:
     int lives;
     int total_points;

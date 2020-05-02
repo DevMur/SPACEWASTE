@@ -10,6 +10,8 @@ extern Game * game;
 
 Enemy::Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
+    if (game->endGame == false)
+    {
     //set random x position
     int random_number = rand() % 800; //size of display
     setPos(random_number,0);
@@ -19,12 +21,12 @@ Enemy::Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     setRotation(180);
     setScale(0.05);
 
-    // make/connect a timer to move the enemy every so often
-    QTimer * timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(move_easy()));
-
-    // start the timer
-    timer->start(50);
+        // make/connect a timer to move the enemy every so often
+        QTimer * timer = new QTimer(this);
+        connect(timer,SIGNAL(timeout()),this,SLOT(move_easy()));
+        // start the timer
+        timer->start(50);
+    }
 }
 
 void Enemy::move_easy()
@@ -35,7 +37,7 @@ void Enemy::move_easy()
         //qDebug("condition wrong");
         if (typeid(*(colliding_items[i])) == typeid(Player))
         {
-            qDebug("HIT");
+            qDebug("no HIT");
             game->health->decrease();
             if (game->health->getHealth() == 0)
             {

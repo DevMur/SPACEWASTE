@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Medium_Enemy.h"
 #include "Hard_Enemy.h"
+#include "Asteroid.h"
 #include "Game.h"
 #include "Player.h"
 #include "Score.h"
@@ -98,6 +99,23 @@ void Bullet::move_bullet(){
 
             return;
         }
+        else if (typeid(*(colliding_items[i])) == typeid(Asteroid))
+        {
+            game->player->ammo_cap++;
+            game->player->asteroid_hits++;
+            if (game->player->asteroid_hits == 3)
+            {
+                scene()->removeItem(colliding_items[i]);
+                scene()->removeItem(this);
+
+                delete colliding_items[i];
+
+
+                //spawn_ammo();
+            }
+            delete this;
+            return;
+        }
     }
 
     // if there was no collision with an Enemy, move the bullet forward
@@ -108,4 +126,32 @@ void Bullet::move_bullet(){
         delete this;
         game->player->ammo_cap++;
     }
+}
+
+void Bullet::spawn_ammo()
+{
+//    setPixmap(QPixmap(":/images/PewGun.png")); //needs a different picture
+//    setTransformOriginPoint(50,50); //they can either have bigger badder versions
+//    setRotation(90);
+//    setScale(0.25);
+//    int a_x = this->x();
+//    int a_y = this->y();
+//    setPos(a_x, a_y);
+//    // make/connect a timer to move the enemy every so often
+//    QTimer * timer = new QTimer(this);
+//    connect(timer,SIGNAL(timeout()),this,SLOT(move_ammo()));
+
+//    // start the timer
+//    timer->start(100);
+//    scene()->removeItem(this);
+//    delete this;
+}
+
+void Bullet::move_ammo()
+{
+//    setPos(x(),y()+5);
+//    if (pos().y() > 800){
+//        scene()->removeItem(this);
+//        delete this;
+//    }
 }

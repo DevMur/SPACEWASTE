@@ -36,6 +36,8 @@ public slots:
     void spawn();
     void spawn2();
     void spawn3();
+
+    void spawn_asteroid();
 };
 
 #endif // GAME_H
