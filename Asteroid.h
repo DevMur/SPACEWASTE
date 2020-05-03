@@ -12,6 +12,7 @@ class Asteroid: public Enemy{
 public:
     Asteroid(QGraphicsItem * parent=0);
 
+    bool for_boss;
 public slots:
     void move_asteroid();
 };

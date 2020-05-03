@@ -1,8 +1,15 @@
 #include <QTimer>
+#include <QTime>
 #include <QGraphicsScene>
 #include <QList>
+#include <QThread>
+#include <QCoreApplication>
 
 #include "Megaleg.h"
+#include "Enemy.h"
+#include "Medium_Enemy.h"
+#include "Hard_Enemy.h"
+#include "Asteroid.h"
 #include "Game.h"
 
 extern Game * game;
@@ -26,8 +33,30 @@ Megaleg::Megaleg(QGraphicsItem *parent)
 void Megaleg::movement()
 {
     //qDebug("moving");
-    if (this->y() < scene()->height()/3)
+    if (this->y() < scene()->height()/6)
     {
-        setPos(x(), y()+0.25);
+        setPos(x(), y()+5.25); //turn 5 into 0 after testing
+    }
+}
+
+void Megaleg::delay()
+{
+    QTime dieTime= QTime::currentTime().addSecs(3);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+
+void Megaleg::attack_one()
+{
+    delay();
+
+    Asteroid * wall_of_asteroids[8];
+    for (int i = 0; i < 8; i++)
+    {
+        wall_of_asteroids[i] = new Asteroid();
+        wall_of_asteroids[i]->for_boss = true;
+        wall_of_asteroids[i]->setPos(i * 100, y());
+        scene()->addItem(wall_of_asteroids[i]);
+
     }
 }

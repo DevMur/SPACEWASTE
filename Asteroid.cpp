@@ -8,8 +8,9 @@
 
 extern Game * game;
 
-Asteroid::Asteroid(QGraphicsItem *parent){
-
+Asteroid::Asteroid(QGraphicsItem *parent)
+{
+    for_boss = false;
     if (game->endGame == false)
     {
     //set random x position
@@ -46,7 +47,22 @@ void Asteroid::move_asteroid()
         }
     }
 
-    setPos(x(),y()+1);
+    if(for_boss == false){setPos(x(),y()+1);}
+    else{
+        int lrc = rand()%3;
+        if (lrc == 0)
+        {
+            setPos(x()-2.5,y()+5);
+        }
+        else if (lrc == 1)
+        {
+            setPos(x()+2.5,y()+5);
+        }
+        else
+        {
+            setPos(x(), y()+7.5);
+        }
+    }
 
     // destroy enemy when it goes out of the screen
     if (pos().y() > 800){

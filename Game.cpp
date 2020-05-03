@@ -5,6 +5,7 @@
 #include <QBrush>
 #include <QImage>
 #include <QPlainTextEdit>
+#include <QThread>
 
 #include "Game.h"
 #include "Score.h"
@@ -44,9 +45,9 @@ void Game::DisplayMenu()
     int pb_xPos = this->width()/2 - play->boundingRect().width()/2;
     int pb_yPos = 350; //tbd location
     play->setPos(pb_xPos, pb_yPos);
-    connect(play, SIGNAL(clicked()), this, SLOT(Level1()));
+    //connect(play, SIGNAL(clicked()), this, SLOT(Level1()));
     //testing boss
-    //connect(play, SIGNAL(clicked()), this, SLOT(Boss_Fight()));
+    connect(play, SIGNAL(clicked()), this, SLOT(Boss_Fight()));
     scene->addItem(play);
 
     //exit and eventually settings, such as ship slider speed and maybe difficulty for bosses.
@@ -200,7 +201,6 @@ void Game::Level3()
 {
     QTimer * timer = new QTimer();
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn3()));
-    connect(player, SIGNAL(dead()), this, SLOT(GameOver()));
     timer->start(2000);
 
     if (this->endGame == true)
@@ -220,6 +220,7 @@ void Game::Level3()
 
 void Game::Boss_Fight()
 {
+    scene->clear(); //must be deleted after testing
     //QTimer * timer = new QTimer();
     Spawn_Boss();
     //timer->start();
@@ -233,6 +234,8 @@ void Game::Spawn_Boss()
 {
     Megaleg *fin = new Megaleg();
     scene->addItem(fin);
+
+    fin->attack_one();
 }
 
 
