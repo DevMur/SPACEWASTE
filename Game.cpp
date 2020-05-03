@@ -33,7 +33,7 @@ Game::Game(QWidget *parent){
 void Game::DisplayMenu()
 {
 //start game
-    QGraphicsTextItem* title = new QGraphicsTextItem("It Gets A Name When Others Can Play");
+    QGraphicsTextItem* title = new QGraphicsTextItem("SPACEWASTE");
     QFont titleFont("Times", 50);
     title->setFont(titleFont);
     int title_xPos = this->width()/2 - title->boundingRect().width()/2;
@@ -45,9 +45,9 @@ void Game::DisplayMenu()
     int pb_xPos = this->width()/2 - play->boundingRect().width()/2;
     int pb_yPos = 350; //tbd location
     play->setPos(pb_xPos, pb_yPos);
-    //connect(play, SIGNAL(clicked()), this, SLOT(Level1()));
+    connect(play, SIGNAL(clicked()), this, SLOT(Level1()));
     //testing boss
-    connect(play, SIGNAL(clicked()), this, SLOT(Boss_Fight()));
+    //connect(play, SIGNAL(clicked()), this, SLOT(Boss_Fight()));
     scene->addItem(play);
 
     //exit and eventually settings, such as ship slider speed and maybe difficulty for bosses.
@@ -103,15 +103,10 @@ void Game::spawn_asteroid()
 
 void Game::GameOver()
 {
-    //scene->clear();
     for (size_t i = 0, n = scene->items().size(); i<n; i++)
     {
         scene->items()[i]->setEnabled(false);
     }
-//    QTimer* timer = new QTimer;
-//    disconnect(this, SLOT(spawn()));
-//    disconnect(SLOT(spawn2()));
-//    disconnect(SLOT(spawn3()));
 
     this->endGame = true;
 
@@ -142,9 +137,7 @@ void Game::GameOver()
  */
 void Game::Level1()
 {
-    //level 1 delete menu;
     scene->clear();
-    //connect(health, SIGNAL(dead), this, SLOT(GameOver()));
 
     player = new Player(); //there is only a single call.
     player->setPos(400,700); // Always be in the middle bottom of screen
@@ -201,6 +194,7 @@ void Game::Level3()
 {
     QTimer * timer = new QTimer();
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn3()));
+    connect(player, SIGNAL(next_level()), this, SLOT(Boss_Fight()));
     timer->start(2000);
 
     if (this->endGame == true)
@@ -220,14 +214,8 @@ void Game::Level3()
 
 void Game::Boss_Fight()
 {
-    scene->clear(); //must be deleted after testing
-    //QTimer * timer = new QTimer();
     Spawn_Boss();
-    //timer->start();
-
     show();
-
-    //timer->stop();
 }
 
 void Game::Spawn_Boss()
@@ -235,17 +223,17 @@ void Game::Spawn_Boss()
     Megaleg *fin = new Megaleg();
     scene->addItem(fin);
 
-//    for (int i  = 5; i > 0; i--) //first round of attacks
-//    {
-//        fin->attack_one(i);
-//    }
+    for (int i  = 5; i > 0; i--)
+    {
+        fin->attack_one(i);
+    }
 
-//    for (int i = 3; i > 0; i--)
-//    {
-//        fin->attack_two(i);
-//    }
+    for (int i = 3; i > 0; i--)
+    {
+        fin->attack_two(i);
+    }
 
-
+    fin->attack_three();
 }
 
 

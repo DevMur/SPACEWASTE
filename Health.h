@@ -14,6 +14,4 @@ signals:
     void dead();
 };
 
-//It's an over-qualified integer.
-
 #endif // HEALTH_H

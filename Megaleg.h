@@ -16,6 +16,7 @@ public slots:
 
     void attack_one(int delay);
     void attack_two(int delay);
+    void attack_three();
 };
 
 #endif // MEGALEG_H

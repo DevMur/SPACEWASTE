@@ -17,15 +17,13 @@ extern Game * game; // there is an external global object called game
 Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
     setPixmap(QPixmap(":/images/PewGun.png"));
-    setScale(0.25); //it's too big
-    setRotation(90);//it's sideways
+    setScale(0.25);
+    setRotation(90);
 
-    //connect a timer to move() the bullet every so often
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move_bullet()));
-
-    //after review the speed stays.
     timer->start(50);
+
     for_player = false;
 }
 
@@ -55,6 +53,7 @@ void Bullet::move_bullet(){
                     emit game->player->next_level();
                     game->level = 2;
                 }
+
                 return;
             }
             else if (typeid(*(colliding_items[i])) == typeid(Medium_Enemy))
@@ -94,7 +93,6 @@ void Bullet::move_bullet(){
 
                 if (game->score->getScore() >= 10000 && game->level == 3)
                 {
-                    //qDebug("score reached next level3");
                     emit game->player->next_level();
                     game->level= 4;
                 }
@@ -124,10 +122,10 @@ void Bullet::move_bullet(){
             }
         }
 
-        // if there was no collision with an Enemy, move the bullet forward
-        // if the bullet is off the screen, destroy it
         setPos(x(),y()-20);
-        if (pos().y() < 0){
+
+        if (pos().y() < 0)
+        {
             scene()->removeItem(this);
             delete this;
             game->player->ammo_cap++;

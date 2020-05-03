@@ -14,15 +14,14 @@ Medium_Enemy::Medium_Enemy(QGraphicsItem *parent){
     int random_number = rand() % 700; //size of display
     setPos(random_number,0);
 
-    setPixmap(QPixmap(":/images/e2.jpeg")); //now it's a crug
-    setTransformOriginPoint(50,50); //they can either have bigger badder versions
+    setPixmap(QPixmap(":/images/e2.jpeg"));
+    setTransformOriginPoint(50,50);
     setRotation(180);
     setScale(0.05);
 
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move_medium()));
     timer->start(50);
-    //switcher=1;
     attack_pattern = rand()%3;
     if(game->endGame == true)
     {
@@ -48,7 +47,7 @@ void Medium_Enemy::move_medium(){
                 setPos(x()+5,y()+1);
             }
         }
-        else if (this->attack_pattern == 1)
+        else if (this->attack_pattern == 1) //readd else after testing
         {
             if (((this->y() > 0 && this->y() <= 10) ||
                 (this->y() > 200 && this->y() <= 300) ||
@@ -95,13 +94,8 @@ void Medium_Enemy::move_medium(){
         QList<QGraphicsItem *> colliding_items = collidingItems();
         for (int i = 0, n = colliding_items.size(); i < n; ++i)
         {
-            //qDebug("condition wrong");
             if (typeid(*(colliding_items[i])) == typeid(Player))
             {
-//                if (game->health->getHealth()-1 == -1)
-//                {
-//                    //TODO:End game
-//                }
                 qDebug("HIT");
                 game->health->decrease();
                 scene()->removeItem(this);
@@ -110,7 +104,6 @@ void Medium_Enemy::move_medium(){
             }
         }
 
-        // destroy enemy when it goes out of the screen
         if (pos().y() > 800){
             scene()->removeItem(this);
             delete this;

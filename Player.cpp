@@ -28,8 +28,6 @@ void Player::keyPressEvent(QKeyEvent *event)
         if (pos().x() + 100 < 800)
         setPos(x()+30,y());
     }
-    //HOW CAN THIS BE FASTER WITHOUT MOVING TOO MANY PIXELS PER CLICK
-    //TODO spacing/movement
 
     else if (event->key() == Qt::Key_Space)
     {
@@ -51,11 +49,9 @@ void Player::keyPressEvent(QKeyEvent *event)
 //        {
 //            bulletsound->play();
 //        }
-//create lazer.
     }
 }
 
-//REDUNDANT? yes, will deal with later
 void Player::setScore(int points){
     total_points = total_points + points;
 }

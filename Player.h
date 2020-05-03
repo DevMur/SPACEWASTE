@@ -26,9 +26,5 @@ signals:
     void next_level();
     void dead();
 };
-//upon spawn a player needs to gain control of their ship (keyboard)
-//there are only 3 possible events but bullets collision test should
-//also be used here. Impacts are bad.
-
 
 #endif // PLAYER_H

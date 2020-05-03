@@ -17,11 +17,5 @@ public:
 public slots:
     void move_bullet();
 };
-//Pretty straight forward. A bullet with a shape gets created.
-//it's only job is to move
-//while moving it may come in contact with something or reach EOF
-//it needs rules to it's movement and rules for destruction
-
-//INQUIRED ABOUT: stack bullet items into 4 parallel
 
 #endif // BULLET_H

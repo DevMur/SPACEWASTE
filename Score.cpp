@@ -18,9 +18,8 @@ Score::Score(QGraphicsItem *parent): QGraphicsTextItem(parent){
 }
 
 void Score::increase(int amount){
-    score += amount;//works for crugs but needs to take an argument.
-    setPlainText(QString("Score: ") + QString::number(score)); // Score: 1
-    //TODO format, it ugly
+    score += amount;
+    setPlainText(QString("Score: ") + QString::number(score));
 }
 
 int Score::getScore(){
