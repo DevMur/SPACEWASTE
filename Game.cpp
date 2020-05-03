@@ -235,7 +235,10 @@ void Game::Spawn_Boss()
     Megaleg *fin = new Megaleg();
     scene->addItem(fin);
 
-    fin->attack_one();
+    for (int i  = 5; i > 0; i--) //first round of attacks
+    {
+        fin->attack_one(i);
+    }
 }
 
 

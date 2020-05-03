@@ -10,11 +10,11 @@ class Megaleg: public QObject, public QGraphicsPixmapItem{
 public:
     Megaleg(QGraphicsItem * parent=0);
 
-    void delay();
+    void delay(int time);
 public slots:
     void movement();
 
-    void attack_one();
+    void attack_one(int delay);
 };
 
 #endif // MEGALEG_H

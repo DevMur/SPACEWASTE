@@ -39,16 +39,16 @@ void Megaleg::movement()
     }
 }
 
-void Megaleg::delay()
+void Megaleg::delay(int delay_time)
 {
-    QTime dieTime= QTime::currentTime().addSecs(3);
+    QTime dieTime = QTime::currentTime().addSecs(delay_time); //addSec( n ) where n = seconds of delay
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
-void Megaleg::attack_one()
+void Megaleg::attack_one(int offset)
 {
-    delay();
+    delay(offset);
 
     Asteroid * wall_of_asteroids[8];
     for (int i = 0; i < 8; i++)
@@ -57,6 +57,5 @@ void Megaleg::attack_one()
         wall_of_asteroids[i]->for_boss = true;
         wall_of_asteroids[i]->setPos(i * 100, y());
         scene()->addItem(wall_of_asteroids[i]);
-
     }
 }
