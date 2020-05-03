@@ -52,8 +52,19 @@ void Enemy::move_easy()
     {
         setPos(200, y()+5);
     }
-    else if (game->endGame == false)
-    {setPos(x(),y()+5); }
+    else if (game->endGame == false && for_boss == false)
+    {
+        setPos(x(),y()+5);
+    }
+    else if (for_boss == true && game->endGame == false)
+    {
+        //qDebug("attack 2 initiated");
+        if (this->y() < 400)
+        {
+            //qDebug("get into position");
+            setPos(x(), y()+5);
+        }
+    }
 
     // destroy enemy when it goes out of the screen
     if (pos().y() > 800){

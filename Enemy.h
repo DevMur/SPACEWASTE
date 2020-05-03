@@ -12,7 +12,7 @@ public:
 
     int value = 10;
     int attack_pattern;
-
+    int for_boss = false;
 public slots:
     void move_easy();
 };

@@ -59,3 +59,23 @@ void Megaleg::attack_one(int offset)
         scene()->addItem(wall_of_asteroids[i]);
     }
 }
+
+void Megaleg::attack_two(int offset)
+{
+    delay(offset);
+
+    Enemy* protectors[4];
+    for (int i = 0; i < 4; i++)
+    {
+        protectors[i] = new Enemy();
+        protectors[i]->setPos(325 + i*50, y());
+        protectors[i]->for_boss = true;
+        scene()->addItem(protectors[i]);
+    }
+
+    delay(3);
+
+    Hard_Enemy* dive_bomb = new Hard_Enemy();
+    dive_bomb->for_boss = true;
+    scene()->addItem(dive_bomb);
+}

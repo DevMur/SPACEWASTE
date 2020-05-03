@@ -36,7 +36,7 @@ void Hard_Enemy::move_hard(){
     {
         setPos(500, y()+5);
     }
-    else if (game->endGame == false)
+    else if (game->endGame == false && for_boss == false)
     {
         if (attack_pattern == 0)
         {
@@ -92,31 +92,36 @@ void Hard_Enemy::move_hard(){
                 }
             }
         }
+    }
+    else if (game->endGame == false && for_boss == true)
+    {
+        //qDebug("go faster");
+        setPos(game->player->x(), y()+45);
+    }
 
-
-        QList<QGraphicsItem *> colliding_items = collidingItems();
-        for (int i = 0, n = colliding_items.size(); i < n; ++i)
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+    {
+        //qDebug("condition wrong");
+        if (typeid(*(colliding_items[i])) == typeid(Player))
         {
-            //qDebug("condition wrong");
-            if (typeid(*(colliding_items[i])) == typeid(Player))
-            {
 //                if (game->health->getHealth()-1 == -1)
 //                {
 //                    //TODO:End game
 //                }
-                qDebug("HIT");
-                game->health->decrease();
+            qDebug("HIT");
+            game->health->decrease();
 
-                scene()->removeItem(this);
-                delete this;
-                break;
-            }
-        }
-
-        // destroy enemy when it goes out of the screen
-        if (pos().y() > 800){
             scene()->removeItem(this);
             delete this;
+            break;
         }
     }
+
+    // destroy enemy when it goes out of the screen
+    if (pos().y() > 800){
+        scene()->removeItem(this);
+        delete this;
+    }
+
 }
