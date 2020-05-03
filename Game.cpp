@@ -165,7 +165,6 @@ void Game::Level1()
 
     if (this->endGame == true)
     {
-        qDebug("uhm");
         timer->stop();
     }
     show();
@@ -176,8 +175,6 @@ void Game::Level1()
 void Game::Level2()
 {
     connect(player, SIGNAL(next_level()), this, SLOT(Level3()));
-    //connect(player, SIGNAL(dead()), this, SLOT(GameOver()));
-    //qDebug("ahahahha level2 baby");
     QTimer * timer = new QTimer();
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(spawn2()));
     timer->start(2000);
@@ -220,20 +217,24 @@ void Game::Boss_Fight()
 
 void Game::Spawn_Boss()
 {
-    Megaleg *fin = new Megaleg();
-    scene->addItem(fin);
-
-    for (int i  = 5; i > 0; i--)
+    if (this->level == 4)
     {
-        fin->attack_one(i);
-    }
+        this->level = 5;
+        Megaleg *fin = new Megaleg();
+        scene->addItem(fin);
 
-    for (int i = 3; i > 0; i--)
-    {
-        fin->attack_two(i);
-    }
+        for (int i  = 5; i > 0; i--)
+        {
+            fin->attack_one(i);
+        }
 
-    fin->attack_three();
+        for (int i = 3; i > 0; i--)
+        {
+            fin->attack_two(i);
+        }
+
+        fin->attack_three();
+    }
 }
 
 

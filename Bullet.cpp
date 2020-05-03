@@ -91,10 +91,10 @@ void Bullet::move_bullet(){
                 delete colliding_items[i];
                 delete this;
 
-                if (game->score->getScore() >= 10000 && game->level == 3)
+                if (game->score->getScore() >= 200 && game->level == 3)
                 {
-                    emit game->player->next_level();
                     game->level= 4;
+                    emit game->player->next_level();
                 }
 
                 return;

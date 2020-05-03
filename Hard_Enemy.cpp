@@ -11,18 +11,20 @@ extern Game * game;
 
 //this needs a timer check.
 Hard_Enemy::Hard_Enemy(QGraphicsItem *parent){
+    if (game->endGame == false)
+    {
+        int random_number = rand() % 700; //size of display
+        setPos(random_number,0);
 
-    int random_number = rand() % 700; //size of display
-    setPos(random_number,0);
+        setPixmap(QPixmap(":/images/e3.png")); //now it's a crug
+        setTransformOriginPoint(50,50); //they can either have bigger badder versions
+        setRotation(180);
+        setScale(0.05);
 
-    setPixmap(QPixmap(":/images/e3.png")); //now it's a crug
-    setTransformOriginPoint(50,50); //they can either have bigger badder versions
-    setRotation(180);
-    setScale(0.05);
-
-    QTimer * timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(move_hard()));
-    timer->start(50);
+        QTimer * timer = new QTimer(this);
+        connect(timer,SIGNAL(timeout()),this,SLOT(move_hard()));
+        timer->start(50);
+    }
     //switcher = 2;
     attack_pattern = rand()%3;
     if(game->endGame == true)
