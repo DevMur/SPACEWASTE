@@ -25,7 +25,7 @@ Hard_Enemy::Hard_Enemy(QGraphicsItem *parent){
         connect(timer,SIGNAL(timeout()),this,SLOT(move_hard()));
         timer->start(50);
     }
-    //switcher = 2;
+
     attack_pattern = rand()%3;
     if(game->endGame == true)
     {

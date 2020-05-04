@@ -10,7 +10,6 @@ class Enemy: public QObject, public QGraphicsPixmapItem{
 public:
     Enemy(QGraphicsItem * parent=0);
 
-    int value = 10;
     int attack_pattern;
     int for_boss = false;
 public slots:
