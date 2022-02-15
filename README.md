@@ -1,5 +1,5 @@
 # SPACEWASTE
-Spacewaste, CSCI 3010 Project
+Spacewaste
 
 To run you must have QtCreator.
 Runs on macOS High Sierra v10.13.6
